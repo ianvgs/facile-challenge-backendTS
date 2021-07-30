@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import db  from '../models'
+import Registro  from '../models'
 import cryptr from'cryptr';
 const crypt:any = new cryptr('facile');
 
@@ -11,7 +11,7 @@ class UserController {
     }
     let reg = req.params.id;
     try {
-        const resultados = await db.Registro.findOne({where:{
+        const resultados = await Registro.findOne({where:{
             id:reg
         }});
         if (!resultados){
@@ -30,8 +30,15 @@ class UserController {
     if (!req.body.name) {
         return res.status(200).json({code:"E_VALIDATION_FAILURE", message: "O campo \"name\"é obrigatório."})
     }
-    let hash = await crypt.encrypt(req.body.name);     
-    const user = await db.Registro.create({encripted_name:hash})
+     let hash = await crypt.encrypt(req.body.name);
+     let createdAt =  new Date;
+     let updatedAt = new Date;   
+    const user = await Registro.create({
+        id:'',
+        encripted_name:hash,            
+        createdAt:createdAt,
+        updatedAt:updatedAt  
+    })
     const id = user.dataValues.id;
     const encripted_name=user.dataValues.encripted_name
     return res.json({id,encripted_name})
