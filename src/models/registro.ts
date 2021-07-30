@@ -3,14 +3,16 @@ import {Model} from 'sequelize';
 
 interface RegistroAttributes {
   id: string;
-  encripted_name:string
+  encripted_name:string  
 }
+
 module.exports = (sequelize:any, DataTypes:any) => {
 
   class Registro extends Model<RegistroAttributes> 
   implements RegistroAttributes { 
     id!:string;
     encripted_name!:string;
+
 
     static associate(models:any) {     
     }
@@ -29,7 +31,6 @@ module.exports = (sequelize:any, DataTypes:any) => {
   }, {
     sequelize,
     modelName: 'Registro',
-  });
-  
+  });  
   return Registro;
 };
