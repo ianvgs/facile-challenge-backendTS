@@ -5,9 +5,10 @@ const crypt:any = new cryptr('facile');
 
 class UserController {
   public async index (req: Request, res: Response): Promise<Response> {  
+    
     if (!req.params.id) {
         return res.status(200).json({message: "Informe um ID via params para realizar a consulta."})
-    }   
+    }       
     const resultados = await db.Registro.findOne({where:{
         id:req.params.id
     }});
