@@ -28,7 +28,7 @@ module.exports = (sequelize:any, DataTypes:any) => {
     } 
   }, {
     sequelize,
-    modelName: 'Registros',
+    modelName: 'Registro',
   });
   
   return Registro;
