@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import Registro  from '../models'
+import db  from '../models/'
 import cryptr from'cryptr';
 const crypt:any = new cryptr('facile');
 
@@ -11,7 +11,7 @@ class UserController {
     }
     let reg = req.params.id;
     try {
-        const resultados = await Registro.findOne({where:{
+        const resultados = await db.Registro.findOne({where:{
             id:reg
         }});
         if (!resultados){
@@ -33,7 +33,7 @@ class UserController {
      let hash = await crypt.encrypt(req.body.name);
      let createdAt =  new Date;
      let updatedAt = new Date;   
-    const user = await Registro.create({
+    const user = await db.Registro.create({
         id:'',
         encripted_name:hash,            
         createdAt:createdAt,

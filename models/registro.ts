@@ -8,10 +8,10 @@ interface RegistroAttributes {
 module.exports = (sequelize:any, DataTypes:any) => {
 
   class Registro extends Model<RegistroAttributes> 
-  implements RegistroAttributes {    
-   
+  implements RegistroAttributes { 
     id!:string;
     encripted_name!:string;
+
     static associate(models:any) {     
     }
   };
@@ -28,7 +28,7 @@ module.exports = (sequelize:any, DataTypes:any) => {
     } 
   }, {
     sequelize,
-    modelName: 'Registro',
+    modelName: 'Registros',
   });
   
   return Registro;
