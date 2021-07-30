@@ -7,7 +7,7 @@ import bodyParser from 'body-parser'
 import routes from './routes'
 
 
-db.sequelize.sync().then(() => {
+db.sequelize.sync({force:true}).then(() => {
     app.use((req, res, next) => {
         res.header("Access-Control-Allow-Origin", "*")
         app.use(cors());
