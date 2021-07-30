@@ -4,21 +4,25 @@ import cryptr from'cryptr';
 const crypt:any = new cryptr('facile');
 
 class UserController {
-  public async index (req: Request, res: Response): Promise<Response> {  
-    
+  public async index (req: Request, res: Response): Promise<Response> {        
+    console.log(req.params)
     if (!req.params.id) {
         return res.status(200).json({message: "Informe um ID via params para realizar a consulta."})
-    }       
-    const resultados = await db.Registro.findOne({where:{
-        id:req.params.id
-    }});
-    if (!resultados){
-        return res.status(200).json({message:'Não foi encontrado registro com o id informado.'})    
-    }    
-    let encripted_name = await crypt.decrypt(resultados.dataValues.encripted_name) 
-    let id = (resultados.dataValues.id)    
-    return res.status(200).json({id,encripted_name})
-            
+    }
+    let reg = req.params.id;
+    try {
+        const resultados = await db.Registro.findOne({where:{
+            id:reg
+        }});
+        if (!resultados){
+            return res.status(200).json({message:'Não foi encontrado registro com o id informado.'})    
+        }    
+        let encripted_name = await crypt.decrypt(resultados.dataValues.encripted_name) 
+        let id = (resultados.dataValues.id)    
+        return res.status(200).json({id,encripted_name})
+      } catch (e) {
+        return res.json({message:"Houve erro na requisição, verifique se foi informado o Id para busca."})
+      }       
   }
 
   public async store (req: Request, res: Response): Promise<Response> {
