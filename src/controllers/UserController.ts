@@ -1,5 +1,5 @@
+import db  from '../models/index';
 import { Request, Response } from 'express'
-import db  from '../models/'
 import cryptr from'cryptr';
 const crypt:any = new cryptr('facile');
 

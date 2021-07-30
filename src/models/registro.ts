@@ -1,6 +1,7 @@
 'use strict';
 import {Model} from 'sequelize';
 
+
 interface RegistroAttributes {
   id: string;
   encripted_name:string  
@@ -12,8 +13,6 @@ module.exports = (sequelize:any, DataTypes:any) => {
   implements RegistroAttributes { 
     id!:string;
     encripted_name!:string;
-
-
     static associate(models:any) {     
     }
   };
