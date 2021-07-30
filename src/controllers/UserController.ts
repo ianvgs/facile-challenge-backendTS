@@ -3,6 +3,7 @@ import db  from '../models/'
 import cryptr from'cryptr';
 const crypt:any = new cryptr('facile');
 
+
 class UserController {
   public async index (req: Request, res: Response): Promise<Response> {        
     console.log(req.params)
@@ -10,7 +11,8 @@ class UserController {
         return res.status(200).json({message: "Informe um ID via params para realizar a consulta."})
     }
     let reg = req.params.id;
-    try {
+    try {        
+        
         const resultados = await db.Registro.findOne({where:{
             id:reg
         }});
