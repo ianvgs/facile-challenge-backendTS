@@ -7,8 +7,7 @@ class UserController {
   public async index (req: Request, res: Response): Promise<Response> {  
     if (!req.params.id) {
         return res.status(200).json({message: "Informe um ID via params para realizar a consulta."})
-    }
-    let reg = req.params.id;    
+    }   
     const resultados = await db.Registro.findOne({where:{
         id:req.params.id
     }});
