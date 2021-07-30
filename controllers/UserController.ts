@@ -30,19 +30,11 @@ class UserController {
     if (!req.body.name) {
         return res.status(200).json({code:"E_VALIDATION_FAILURE", message: "O campo \"name\"é obrigatório."})
     }
-     let hash = await crypt.encrypt(req.body.name);
-     let createdAt =  new Date;
-     let updatedAt = new Date;    
-
-        const user = await db.Registro.create({
-            id:'',
-            encripted_name:hash,            
-            createdAt:createdAt,
-            updatedAt:updatedAt  
-        })
-        const id = user.dataValues.id;
-        const encripted_name=user.dataValues.encripted_name
-        return res.json({id,encripted_name})
+    let hash = await crypt.encrypt(req.body.name);     
+    const user = await db.Registro.create({encripted_name:hash})
+    const id = user.dataValues.id;
+    const encripted_name=user.dataValues.encripted_name
+    return res.json({id,encripted_name})
     }
 }
 
