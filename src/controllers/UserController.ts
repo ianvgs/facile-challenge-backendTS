@@ -33,12 +33,8 @@ class UserController {
         if (!req.body.name) {
             return res.status(200).json({code:"E_VALIDATION_FAILURE", message: "O campo \"name\"é obrigatório."})
         }  
-        let reg:any = req.body.name;
-
-        function isString(reg:any){
-            return Object.prototype.toString.call(reg) === "[object String]"
-        }           
-        if (isString(true)){ 
+        let reg:any = req.body.name;   
+        if (typeof reg === 'string'){ 
             let hash:string = await crypt.encrypt(req.body.name);     
             let createdAt =  new Date;
             let updatedAt = new Date;   
