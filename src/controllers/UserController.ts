@@ -35,12 +35,9 @@ class UserController {
         }   
         
         
-        let reg:any = req.body.name;
+        let reg:any = req.body.name;       
 
-        
-
-        if (typeof reg === 'string'){
-            
+        if (typeof reg === 'string'){ 
             let hash:string = await crypt.encrypt(req.body.name);     
             let createdAt =  new Date;
             let updatedAt = new Date;   
@@ -53,9 +50,13 @@ class UserController {
             const id = user.dataValues.id;
             const encripted_name=user.dataValues.encripted_name
             return res.json({id,encripted_name})
+        } else {
+
+            return res.json({message:"O parâmetro informado não é uma string, por favor informe uma string."})
+
         }
 
-        return res.json({message:"O parâmetro informado não é uma string, por favor informe uma string."})
+        
 
 
     }
