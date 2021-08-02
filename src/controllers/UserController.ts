@@ -32,9 +32,12 @@ class UserController {
         console.log(req.body)
         if (!req.body.name) {
             return res.status(200).json({code:"E_VALIDATION_FAILURE", message: "O campo \"name\"é obrigatório."})
-        }       
+        }   
+        
+        let reg:any = req.body.name;
 
-        if (typeof req.body.name === 'string' || req.body.name instanceof String){
+        if (typeof reg === 'string' || reg instanceof String){
+            
             let hash:string = await crypt.encrypt(req.body.name);     
             let createdAt =  new Date;
             let updatedAt = new Date;   

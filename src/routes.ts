@@ -10,3 +10,7 @@ routes.get('/', (req,res)=>{
 routes.post('/registro/', UserController.store)
 
 export default routes
+
+
+
+
